@@ -149,6 +149,15 @@
 															"supportRFC5988": "true"
 														}
 													},
+													"sink": {
+														"type": "JsonSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "JsonWriteSettings"
+														}
+													},
 													"enableStaging": false
 												},
 												"inputs": [
@@ -156,7 +165,44 @@
 														"referenceName": "RestResource1",
 														"type": "DatasetReference"
 													}
+												],
+												"outputs": [
+													{
+														"referenceName": "blob_json",
+														"type": "DatasetReference"
+													}
 												]
+											},
+											{
+												"name": "Power Query1",
+												"type": "ExecuteWranglingDataflow",
+												"dependsOn": [
+													{
+														"activity": "Copy data1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataflow": {
+														"referenceName": "powerquery3",
+														"type": "DataFlowReference"
+													},
+													"compute": {
+														"coreCount": 8,
+														"computeType": "General"
+													},
+													"queries": []
+												}
 											}
 										]
 									}

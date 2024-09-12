@@ -1,0 +1,9 @@
+{
+	"name": "powerquery3",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": []
+		}
+	}
+}
