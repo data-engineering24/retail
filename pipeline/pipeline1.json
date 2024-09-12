@@ -174,8 +174,8 @@
 												]
 											},
 											{
-												"name": "Power Query1",
-												"type": "ExecuteWranglingDataflow",
+												"name": "Data flow1",
+												"type": "ExecuteDataFlow",
 												"dependsOn": [
 													{
 														"activity": "Copy data1",
@@ -194,14 +194,14 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "powerquery3",
+														"referenceName": "dataflow1",
 														"type": "DataFlowReference"
 													},
 													"compute": {
 														"coreCount": 8,
 														"computeType": "General"
 													},
-													"queries": []
+													"traceLevel": "Fine"
 												}
 											}
 										]
