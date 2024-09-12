@@ -12,15 +12,7 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "flatten1"
@@ -38,7 +30,7 @@
 				"source1 foldDown(unroll(results),",
 				"     mapColumn(",
 				"          gender = results.gender,",
-				"          firstname = results.name.first,",
+				"          name = results.name,",
 				"          location = results.location,",
 				"          email = results.email,",
 				"          login = results.login,",
@@ -51,22 +43,7 @@
 				"          nat = results.nat",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          id as integer,",
-				"          feed_name as string,",
-				"          feed_file as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     skipDuplicateMapOutputs: false) ~> flatten1"
 			]
 		}
 	}
