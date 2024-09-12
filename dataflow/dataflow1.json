@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "blob_json_src",
+						"referenceName": "Json1",
 						"type": "DatasetReference"
 					},
 					"name": "source"
@@ -15,20 +15,15 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "select1"
+					"name": "flowlet1"
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          results as (gender as string, name as (title as string, first as string, last as string), location as (street as (number as integer, name as string), city as string, state as string, country as string, postcode as integer, coordinates as (latitude as string, longitude as string), timezone as (offset as string, description as string)), email as string, login as (uuid as string, username as string, password as string, salt as string, md5 as string, sha1 as string, sha256 as string), dob as (date as string, age as integer), registered as (date as string, age as integer), phone as string, cell as string, id as (name as string, value as string), picture as (large as string, medium as string, thumbnail as string), nat as string)[],",
-				"          info as (seed as string, results as integer, page as integer, version as string)",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine') ~> source",
-				"source select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"source compose(composition: 'undefined') ~> flowlet1@()"
 			]
 		}
 	}
