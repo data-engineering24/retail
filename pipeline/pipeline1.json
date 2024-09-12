@@ -57,7 +57,7 @@
 								},
 								"cases": [
 									{
-										"value": "csv",
+										"value": "ftp",
 										"activities": [
 											{
 												"name": "Copy data",
@@ -125,7 +125,7 @@
 										]
 									},
 									{
-										"value": "ftp",
+										"value": "api",
 										"activities": [
 											{
 												"name": "Copy data1",
