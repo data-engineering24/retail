@@ -1,0 +1,9 @@
+{
+	"name": "impiger-adf-instance",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ad1739eb-2983-495b-8918-5e456e454d7d",
+		"tenantId": "5e9df912-7c60-4173-b60a-f2870eae7dfa"
+	}
+}
