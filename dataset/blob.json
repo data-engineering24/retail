@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('randomuser_' ,  formatDateTime(utcNow() ,'yyyyMMdd') , '.json' )",
+					"type": "Expression"
+				},
 				"folderPath": "retail",
 				"container": "inbound"
 			},
