@@ -24,12 +24,6 @@
 			"transformations": [
 				{
 					"name": "flatten1"
-				},
-				{
-					"name": "flatten2"
-				},
-				{
-					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -41,7 +35,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine') ~> source1",
-				"flatten2 foldDown(unroll(results),",
+				"source1 foldDown(unroll(results),",
 				"     mapColumn(",
 				"          gender = results.gender,",
 				"          firstname = results.name.first,",
@@ -58,18 +52,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"select1 foldDown(unroll(),",
-				"     mapColumn(",
-				"          results,",
-				"          info",
-				"     ),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten2",
-				"source1 select(mapColumn(",
-				"          results",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
