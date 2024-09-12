@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "wer_customer_20201111.csv",
 				"folderPath": "retail",
 				"container": "inbound"
 			},
