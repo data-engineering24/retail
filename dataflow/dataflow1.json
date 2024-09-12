@@ -6,19 +6,62 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Json1",
+						"referenceName": "blob_json_src",
 						"type": "DatasetReference"
 					},
 					"name": "source"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: false,",
+				"source(output(",
+				"          results as (gender as string, name as (title as string, first as string, last as string), location as (street as (number as integer, name as string), city as string, state as string, country as string, postcode as integer, coordinates as (latitude as string, longitude as string), timezone as (offset as string, description as string)), email as string, login as (uuid as string, username as string, password as string, salt as string, md5 as string, sha1 as string, sha256 as string), dob as (date as string, age as integer), registered as (date as string, age as integer), phone as string, cell as string, id as (name as string, value as string), picture as (large as string, medium as string, thumbnail as string), nat as string)[],",
+				"          info as (seed as string, results as integer, page as integer, version as string)",
+				"     ),",
+				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> source"
+				"     documentForm: 'documentPerLine') ~> source",
+				"source select(mapColumn(",
+				"          gender = results[1].gender,",
+				"          info = results[1].name,",
+				"          title = results[1].name.title",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'api_tbl',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     recreate: true,",
+				"     stagingSchemaName: '',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
