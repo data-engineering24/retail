@@ -16,10 +16,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "MySqlSource"
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "MySqlTable",
+						"referenceName": "impiger_dev_db",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
