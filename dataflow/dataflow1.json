@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          id as integer,",
@@ -24,7 +28,8 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source"
+				"     format: 'table') ~> source",
+				"source filter(ERROR_FUNCTION('')) ~> filter1"
 			]
 		}
 	}
