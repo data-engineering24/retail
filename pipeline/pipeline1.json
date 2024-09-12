@@ -114,7 +114,15 @@
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"cases": []
+								"on": {
+									"value": "@item().feed_type",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "csv"
+									}
+								]
 							}
 						}
 					]
