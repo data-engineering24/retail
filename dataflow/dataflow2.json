@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "impiger_dev_db_api",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -54,11 +54,6 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          id as integer,",
-				"          feed_name as string,",
-				"          feed_file as string",
-				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
