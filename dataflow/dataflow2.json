@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "impiger_dev_db_api",
+						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -38,7 +38,7 @@
 				"source1 foldDown(unroll(results, results),",
 				"     mapColumn(",
 				"          gender = results.gender,",
-				"          name = results.name,",
+				"          firstname = results.name.first,",
 				"          location = results.location,",
 				"          email = results.email,",
 				"          login = results.login,",
@@ -54,11 +54,15 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          feed_name as string,",
+				"          feed_file as string",
+				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
-				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
