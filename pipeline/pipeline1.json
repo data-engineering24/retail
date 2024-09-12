@@ -146,8 +146,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"method": "GET",
-					"url": "https://randomuser.me/api/"
+					"method": "GET"
+				},
+				"linkedServiceName": {
+					"referenceName": "WebConnection1",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
