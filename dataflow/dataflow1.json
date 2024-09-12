@@ -26,7 +26,7 @@
 					"name": "select1"
 				},
 				{
-					"name": "select2"
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
@@ -40,14 +40,24 @@
 				"     documentForm: 'documentPerLine') ~> source",
 				"source select(mapColumn(",
 				"          gender = results[1].gender,",
-				"          city = results[1].email,",
-				"          title = results[1].phone",
+				"          email = results[1].email,",
+				"          phone = results[1].phone,",
+				"          name = results[1].name",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 sink(allowSchemaDrift: true,",
+				"select1 foldDown(unroll(),",
+				"     mapColumn(",
+				"          gender,",
+				"          email,",
+				"          phone,",
+				"          name = name.title,",
+				"          first = name.first,",
+				"          last = name.last",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
