@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "flatten2"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -55,13 +58,15 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"source1 foldDown(unroll(results),",
+				"split1 foldDown(unroll(),",
 				"     mapColumn(",
 				"          results,",
 				"          info",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten2",
+				"source1 split(ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> split1@(, )",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
