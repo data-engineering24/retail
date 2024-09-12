@@ -28,6 +28,10 @@
 					"name": "sink1"
 				},
 				{
+					"dataset": {
+						"referenceName": "impiger_dev_db_parquit",
+						"type": "DatasetReference"
+					},
 					"name": "sink2"
 				}
 			],
@@ -94,8 +98,15 @@
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink2"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}
