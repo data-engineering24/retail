@@ -170,7 +170,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "blob",
+														"referenceName": "blob_json",
 														"type": "DatasetReference"
 													}
 												]
