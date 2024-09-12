@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "RestResource1",
+						"type": "DatasetReference"
+					},
 					"name": "source"
 				}
 			],
@@ -12,7 +16,10 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: false,",
-				"     validateSchema: false) ~> source"
+				"     validateSchema: false,",
+				"     httpMethod: 'GET',",
+				"     timeout: 30,",
+				"     requestInterval: 0) ~> source"
 			]
 		}
 	}
