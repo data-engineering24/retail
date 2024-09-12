@@ -1,0 +1,20 @@
+{
+	"name": "blob_json_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "randomuser_20240912103943.json",
+				"folderPath": "retail",
+				"container": "inbound"
+			}
+		},
+		"schema": {}
+	}
+}
