@@ -1,0 +1,50 @@
+{
+	"name": "Parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Flights 1m.parquet",
+				"folderPath": "retail",
+				"fileSystem": "inbound"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "FL_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "DEP_DELAY",
+				"type": "INT_16"
+			},
+			{
+				"name": "ARR_DELAY",
+				"type": "INT_16"
+			},
+			{
+				"name": "AIR_TIME",
+				"type": "INT_16"
+			},
+			{
+				"name": "DISTANCE",
+				"type": "INT_16"
+			},
+			{
+				"name": "DEP_TIME",
+				"type": "FLOAT"
+			},
+			{
+				"name": "ARR_TIME",
+				"type": "FLOAT"
+			}
+		]
+	}
+}
