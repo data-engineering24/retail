@@ -134,8 +134,8 @@
 				}
 			},
 			{
-				"name": "Hive1",
-				"type": "HDInsightHive",
+				"name": "Web1",
+				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -146,7 +146,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": ""
+					"method": "GET"
 				}
 			}
 		],
