@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "apicsv",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "flatten1"
@@ -30,7 +38,7 @@
 				"source1 foldDown(unroll(results),",
 				"     mapColumn(",
 				"          gender = results.gender,",
-				"          name = results.name,",
+				"          firstname = results.name.first,",
 				"          location = results.location,",
 				"          email = results.email,",
 				"          login = results.login,",
@@ -38,12 +46,14 @@
 				"          registered = results.registered,",
 				"          phone = results.phone,",
 				"          cell = results.cell,",
-				"          id = results.id,",
-				"          picture = results.picture,",
-				"          nat = results.nat",
+				"          id = results.id",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1"
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
