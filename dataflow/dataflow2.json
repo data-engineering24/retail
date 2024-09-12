@@ -1,0 +1,73 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "blob_json_src",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          results as (gender as string, name as (title as string, first as string, last as string), location as (street as (number as integer, name as string), city as string, state as string, country as string, postcode as integer, coordinates as (latitude as string, longitude as string), timezone as (offset as string, description as string)), email as string, login as (uuid as string, username as string, password as string, salt as string, md5 as string, sha1 as string, sha256 as string), dob as (date as string, age as integer), registered as (date as string, age as integer), phone as string, cell as string, id as (name as string, value as string), picture as (large as string, medium as string, thumbnail as string), nat as string)[],",
+				"          info as (seed as string, results as integer, page as integer, version as string)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 foldDown(unroll(results, results),",
+				"     mapColumn(",
+				"          gender = results.gender,",
+				"          name = results.name,",
+				"          location = results.location,",
+				"          email = results.email,",
+				"          login = results.login,",
+				"          dob = results.dob,",
+				"          registered = results.registered,",
+				"          phone = results.phone,",
+				"          cell = results.cell,",
+				"          id = results.id,",
+				"          picture = results.picture,",
+				"          nat = results.nat",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          feed_name as string,",
+				"          feed_file as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
