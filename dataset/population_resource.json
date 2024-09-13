@@ -1,0 +1,12 @@
+{
+	"name": "population_resource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "population_api_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
