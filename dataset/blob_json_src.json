@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "randomuser_20240912103943.json",
+				"fileName": "wer_customer_20201112.csv",
 				"folderPath": "retail",
 				"container": "inbound"
 			}
