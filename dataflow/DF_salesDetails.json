@@ -233,7 +233,10 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
 				"selectInward, selectSales union(byName: true)~> unionSales",
-				"unionSales compose(composition: 'DF_let_SalesDim') ~> flowlet1@(temporary)"
+				"unionSales compose(mapColumn(",
+				"          executed_time = sales_date",
+				"     ),",
+				"     composition: 'DF_let_SalesDim') ~> flowlet1@(temporary)"
 			]
 		}
 	}

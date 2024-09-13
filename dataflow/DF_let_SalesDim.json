@@ -11,14 +11,25 @@
 			"sinks": [],
 			"transformations": [
 				{
+					"name": "join1"
+				},
+				{
 					"name": "input1"
 				}
 			],
 			"scriptLines": [
-				"input(order: 0,",
+				"input(output(",
+				"          executed_time as timestamp",
+				"     ),",
+				"     order: 0,",
 				"     allowSchemaDrift: true) ~> input1",
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1"
+				"     validateSchema: false) ~> source1",
+				"source1 join(ERROR_FUNCTION(''),",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
