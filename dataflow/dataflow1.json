@@ -41,6 +41,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
@@ -75,7 +78,14 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"source derive(new_name = concat( concat( results.name.first, '-' ),  results.name.last)) ~> derivedColumn1",
+				"flatten1 derive(new_name = concat( concat( results.name.first, '-' ),  results.name.last)) ~> derivedColumn1",
+				"source foldDown(unroll(results),",
+				"     mapColumn(",
+				"          results = results.gender,",
+				"          info",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
