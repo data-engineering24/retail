@@ -33,7 +33,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source1",
-				"source1 assert(expectTrue(stid == \"Chennai\", false, 'assert1')) ~> assert1"
+				"source1 assert(expectTrue(state_id == 1, false, 'assert1')) ~> assert1"
 			]
 		}
 	}
