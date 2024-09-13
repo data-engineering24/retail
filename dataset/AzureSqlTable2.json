@@ -1,0 +1,54 @@
+{
+	"name": "AzureSqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "impiger_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "city_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "city",
+				"type": "varchar"
+			},
+			{
+				"name": "state_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "created_date",
+				"type": "date"
+			},
+			{
+				"name": "created_by",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "updated_date",
+				"type": "date"
+			},
+			{
+				"name": "updated_by",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "retail",
+			"table": "m_city"
+		}
+	}
+}
