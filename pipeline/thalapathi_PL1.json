@@ -99,6 +99,7 @@
 															"interimSchemaName": "retail"
 														},
 														"sqlWriterUseTableLock": true,
+														"tableOption": "autoCreate",
 														"disableMetricsCollection": false
 													},
 													"enableStaging": false,
