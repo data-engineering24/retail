@@ -10,6 +10,9 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcInward"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -26,7 +29,9 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: false) ~> srcInward"
+				"     columnNamesAsHeader: false) ~> srcInward",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1"
 			]
 		}
 	}
