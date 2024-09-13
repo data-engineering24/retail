@@ -23,7 +23,7 @@
 						"referenceName": "AzureDataLakeStorage1",
 						"type": "LinkedServiceReference"
 					},
-					"name": "source1"
+					"name": "srcSalesHeader"
 				},
 				{
 					"linkedService": {
@@ -43,6 +43,9 @@
 				},
 				{
 					"name": "selectInward"
+				},
+				{
+					"name": "joinSales"
 				}
 			],
 			"scriptLines": [
@@ -103,30 +106,7 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcInwardDetail",
-				"source(output(",
-				"          {_col0_} as string,",
-				"          {_col1_} as string,",
-				"          {_col2_} as string,",
-				"          {_col3_} as string,",
-				"          {_col4_} as string,",
-				"          {_col5_} as string,",
-				"          {_col6_} as string,",
-				"          {_col7_} as string,",
-				"          {_col8_} as string,",
-				"          {_col9_} as string,",
-				"          {_col10_} as string,",
-				"          {_col11_} as string,",
-				"          {_col12_} as string,",
-				"          {_col13_} as string,",
-				"          {_col14_} as string,",
-				"          {_col15_} as string,",
-				"          {_col16_} as string,",
-				"          {_col17_} as string,",
-				"          {_col18_} as string,",
-				"          {_col19_} as string,",
-				"          {_col20_} as string",
-				"     ),",
-				"     useSchema: false,",
+				"source(useSchema: false,",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
@@ -137,7 +117,7 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: false) ~> source1",
+				"     columnNamesAsHeader: true) ~> srcSalesHeader",
 				"source(useSchema: false,",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -172,7 +152,12 @@
 				"          amount = srcInwardDetail@amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectInward"
+				"     skipDuplicateMapOutputs: true) ~> selectInward",
+				"srcSalesHeader, srcSalesDetail join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinSales"
 			]
 		}
 	}
