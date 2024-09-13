@@ -69,7 +69,7 @@
 				"source select(mapColumn(",
 				"          gender = results[1].gender,",
 				"          email = results[1].email,",
-				"          phone = results[1].phone,",
+				"          phone = {results[1].phon},",
 				"          name = results[1].name",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
