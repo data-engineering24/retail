@@ -1,0 +1,22 @@
+{
+	"name": "SFTP1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Sftp1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"folderPath": "/home/impiger/project003"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
