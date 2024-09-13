@@ -94,11 +94,11 @@
 														"upsertSettings": {
 															"useTempDB": false,
 															"keys": [
-																""
+																"customer_id"
 															],
 															"interimSchemaName": "retail"
 														},
-														"sqlWriterUseTableLock": false,
+														"sqlWriterUseTableLock": true,
 														"disableMetricsCollection": false
 													},
 													"enableStaging": false,
