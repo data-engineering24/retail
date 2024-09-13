@@ -150,6 +150,20 @@
 													},
 													"traceLevel": "Fine"
 												}
+											},
+											{
+												"name": "Set variable1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "v_feed_file",
+													"value": ""
+												}
 											}
 										]
 									},
@@ -242,6 +256,11 @@
 				}
 			}
 		],
+		"variables": {
+			"v_feed_file": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2024-09-12T06:31:43Z"
 	},
