@@ -44,6 +44,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -69,7 +72,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     moveFiles: ['retail','retail/archive'],",
 				"     format: 'parquet') ~> source1",
-				"source foldDown(unroll(results),",
+				"join1 foldDown(unroll(results),",
 				"     mapColumn(",
 				"          gender = results.gender,",
 				"          email = results.email,",
@@ -87,6 +90,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"source join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
