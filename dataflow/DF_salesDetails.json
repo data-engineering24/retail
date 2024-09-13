@@ -57,7 +57,7 @@
 			"scriptLines": [
 				"source(output(",
 				"          inward_header_id as short,",
-				"          inward_date as date 'yyyy/MM/dd',",
+				"          inward_date as date 'MM/dd/yyyy',",
 				"          supplier_id as short,",
 				"          branch_id as short,",
 				"          collected_by as boolean,",
@@ -114,7 +114,7 @@
 				"     columnNamesAsHeader: true) ~> srcInwardDetail",
 				"source(output(",
 				"          sales_header_id as short,",
-				"          sales_header_date as date,",
+				"          sales_header_date as date 'MM/dd/yyyy',",
 				"          branch_id as short,",
 				"          terminal_id as short,",
 				"          teller_id as short,",
