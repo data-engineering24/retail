@@ -28,7 +28,7 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: false,",
-				"     wildcardPaths:['@item().feed_file']) ~> source1"
+				"     wildcardPaths:[($p_file_name_wc)]) ~> source1"
 			]
 		}
 	}
