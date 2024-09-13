@@ -1,0 +1,15 @@
+{
+	"name": "MySqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`m_branch`"
+		}
+	}
+}
