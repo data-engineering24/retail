@@ -41,6 +41,9 @@
 				},
 				{
 					"name": "flatten1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -75,7 +78,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 foldDown(unroll(),",
+				"derivedColumn1 foldDown(unroll(),",
 				"     mapColumn(",
 				"          gender,",
 				"          email,",
@@ -86,6 +89,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"select1 derive() ~> derivedColumn1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
