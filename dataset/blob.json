@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "retail",
+				"folderPath": "retail1",
 				"container": "inbound"
 			},
 			"columnDelimiter": ",",
