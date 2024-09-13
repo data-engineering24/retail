@@ -17,15 +17,24 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcInwardDetail"
+				},
+				{
+					"name": "source1"
+				},
+				{
+					"name": "source2"
+				},
+				{
+					"name": "source3"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "join1"
+					"name": "joinInward"
 				},
 				{
-					"name": "select1"
+					"name": "selectInward"
 				}
 			],
 			"scriptLines": [
@@ -86,44 +95,33 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcInwardDetail",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source2",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source3",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1",
-				"join1 select(mapColumn(",
-				"          inward_header_id = srcInwardHeader@inward_header_id,",
+				"     broadcast: 'auto')~> joinInward",
+				"joinInward select(mapColumn(",
 				"          inward_date,",
 				"          supplier_id,",
 				"          branch_id,",
 				"          collected_by,",
-				"          verified_by,",
 				"          amount = srcInwardHeader@amount,",
 				"          discount_amount,",
 				"          tax_amount,",
 				"          final_amount,",
-				"          status_id = srcInwardHeader@status_id,",
-				"          created_date = srcInwardHeader@created_date,",
-				"          created_by = srcInwardHeader@created_by,",
-				"          updated_date = srcInwardHeader@updated_date,",
-				"          updated_by = srcInwardHeader@updated_by,",
-				"          inward_detail_id,",
-				"          inward_header_id = srcInwardDetail@inward_header_id,",
-				"          po_detail_id,",
 				"          product_id,",
 				"          uom_id,",
 				"          qty,",
-				"          amount = srcInwardDetail@amount,",
-				"          batch_number,",
-				"          expiry_date,",
-				"          status_id = srcInwardDetail@status_id,",
-				"          created_date = srcInwardDetail@created_date,",
-				"          created_by = srcInwardDetail@created_by,",
-				"          updated_date = srcInwardDetail@updated_date,",
-				"          updated_by = srcInwardDetail@updated_by",
+				"          amount = srcInwardDetail@amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> selectInward"
 			]
 		}
 	}
