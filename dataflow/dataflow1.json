@@ -75,7 +75,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"source derive(new_name = ERROR_FUNCTION('')) ~> derivedColumn1",
+				"source derive(new_name = concat( concat( results.name.first, '-' ),  results.name.last)) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
