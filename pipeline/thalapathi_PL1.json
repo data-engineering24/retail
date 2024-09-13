@@ -89,15 +89,17 @@
 														}
 													},
 													"sink": {
-														"type": "DelimitedTextSink",
-														"storeSettings": {
-															"type": "AzureBlobStorageWriteSettings"
+														"type": "AzureSqlSink",
+														"writeBehavior": "upsert",
+														"upsertSettings": {
+															"useTempDB": false,
+															"keys": [
+																""
+															],
+															"interimSchemaName": "retail"
 														},
-														"formatSettings": {
-															"type": "DelimitedTextWriteSettings",
-															"quoteAllText": true,
-															"fileExtension": ""
-														}
+														"sqlWriterUseTableLock": false,
+														"disableMetricsCollection": false
 													},
 													"enableStaging": false,
 													"translator": {
@@ -117,7 +119,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "blob",
+														"referenceName": "impiger_dev_db_customenr",
 														"type": "DatasetReference"
 													}
 												]
