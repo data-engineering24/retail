@@ -17,6 +17,9 @@
 					"name": "select1"
 				},
 				{
+					"name": "assert1"
+				},
+				{
 					"name": "input1"
 				}
 			],
@@ -34,7 +37,8 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"source1 select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"input1 assert(expectTrue(ERROR_FUNCTION(''), false, 'assert1')) ~> assert1"
 			]
 		}
 	}
