@@ -189,7 +189,7 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> joinInward",
 				"joinInward select(mapColumn(",
-				"          inward_date,",
+				"          sales_date = inward_date,",
 				"          supplier_id,",
 				"          branch_id,",
 				"          collected_by,",
