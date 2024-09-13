@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          calendar_id as integer,",
@@ -45,7 +49,33 @@
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
 				"     tableName: 'm_calendar',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> sourceDate"
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> sourceDate",
+				"sourceDate select(mapColumn(",
+				"          calendar_id,",
+				"          calendar_value,",
+				"          day_number,",
+				"          week_day_number,",
+				"          week_day_name,",
+				"          week_month,",
+				"          week_year,",
+				"          month_number,",
+				"          month_name_short,",
+				"          month_name,",
+				"          quarterly_name,",
+				"          half_yearly_name,",
+				"          year_number,",
+				"          finalcial_year,",
+				"          is_weekend,",
+				"          is_holiday,",
+				"          season,",
+				"          status_id,",
+				"          created_date,",
+				"          created_by,",
+				"          updated_date,",
+				"          updated_by",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
