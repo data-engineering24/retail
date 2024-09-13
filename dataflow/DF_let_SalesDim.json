@@ -5,14 +5,47 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "source1"
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sourceDate"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1"
+				"source(output(",
+				"          calendar_id as integer,",
+				"          calendar_value as date,",
+				"          day_number as string,",
+				"          week_day_number as string,",
+				"          week_day_name as string,",
+				"          week_month as string,",
+				"          week_year as string,",
+				"          month_number as string,",
+				"          month_name_short as string,",
+				"          month_name as string,",
+				"          quarterly_name as string,",
+				"          half_yearly_name as string,",
+				"          year_number as string,",
+				"          finalcial_year as string,",
+				"          is_weekend as integer,",
+				"          is_holiday as integer,",
+				"          season as string,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_calendar',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> sourceDate"
 			]
 		}
 	}
