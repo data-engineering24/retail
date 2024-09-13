@@ -54,7 +54,7 @@
 					"name": "unionSales"
 				},
 				{
-					"name": "flowlet1",
+					"name": "flowletDim",
 					"flowlet": {
 						"referenceName": "DF_let_SalesDim",
 						"type": "DataFlowReference"
@@ -236,7 +236,7 @@
 				"unionSales compose(mapColumn(",
 				"          executed_time = sales_date",
 				"     ),",
-				"     composition: 'DF_let_SalesDim') ~> flowlet1@(temporary)"
+				"     composition: 'DF_let_SalesDim') ~> flowletDim@(temporary)"
 			]
 		}
 	}
