@@ -51,7 +51,7 @@
 					"name": "selectSales"
 				},
 				{
-					"name": "union1"
+					"name": "unionSales"
 				}
 			],
 			"scriptLines": [
@@ -254,7 +254,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
-				"selectInward union(byName: true)~> union1"
+				"selectInward, selectSales union(byName: true)~> unionSales"
 			]
 		}
 	}
