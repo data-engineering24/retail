@@ -48,7 +48,10 @@
 					"name": "joinSales"
 				},
 				{
-					"name": "select1"
+					"name": "selectSales"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -250,7 +253,8 @@
 				"          {Unnamed: 19}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> selectSales",
+				"selectInward union(byName: true)~> union1"
 			]
 		}
 	}
