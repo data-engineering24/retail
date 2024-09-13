@@ -82,7 +82,7 @@
 				"     format: 'delimited',",
 				"     fileSystem: 'inbound',",
 				"     folderPath: 'retail',",
-				"     fileName: 'abc_inward_header_20200229.csv',",
+				"     fileName: 'abc_inward_detail_20200229.csv',",
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
