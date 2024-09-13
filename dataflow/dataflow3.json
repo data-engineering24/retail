@@ -10,14 +10,13 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcInward"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "flowlet1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(useSchema: false,",
 				"     allowSchemaDrift: true,",
@@ -31,7 +30,8 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: false) ~> srcInward",
-				"srcInward compose(composition: 'undefined') ~> flowlet1@()"
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1"
 			]
 		}
 	}
