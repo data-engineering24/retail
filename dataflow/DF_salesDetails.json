@@ -52,6 +52,13 @@
 				},
 				{
 					"name": "unionSales"
+				},
+				{
+					"name": "flowlet1",
+					"flowlet": {
+						"referenceName": "DF_let_SalesDim",
+						"type": "DataFlowReference"
+					}
 				}
 			],
 			"scriptLines": [
@@ -225,7 +232,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
-				"selectInward, selectSales union(byName: true)~> unionSales"
+				"selectInward, selectSales union(byName: true)~> unionSales",
+				"unionSales compose(composition: 'DF_let_SalesDim') ~> flowlet1@(temporary)"
 			]
 		}
 	}

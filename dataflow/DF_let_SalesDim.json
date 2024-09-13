@@ -1,13 +1,18 @@
 {
-	"name": "flowlet1",
+	"name": "DF_let_SalesDim",
 	"properties": {
 		"type": "Flowlet",
 		"typeProperties": {
 			"sources": [],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "input1"
+				}
+			],
 			"scriptLines": [
-				""
+				"input(order: 0,",
+				"     allowSchemaDrift: true) ~> input1"
 			]
 		}
 	}
