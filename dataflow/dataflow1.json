@@ -44,9 +44,6 @@
 				},
 				{
 					"name": "derivedColumn1"
-				},
-				{
-					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -81,11 +78,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"join1 foldDown(unroll(),",
+				"derivedColumn1 foldDown(unroll(),",
 				"     mapColumn(",
-				"          gender = select1@gender,",
-				"          email = select1@email,",
-				"          phone = select1@phone,",
+				"          gender,",
+				"          email,",
+				"          phone,",
 				"          name = name.title,",
 				"          first = name.first,",
 				"          last = name.last",
@@ -93,11 +90,6 @@
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"select1 derive(name = concat(first , ' ' , last)) ~> derivedColumn1",
-				"derivedColumn1, select1 join(select1@email == select1@email,",
-				"     joinType:'inner',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
