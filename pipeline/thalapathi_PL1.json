@@ -130,7 +130,14 @@
 											{
 												"name": "DF_customer",
 												"type": "ExecuteDataFlow",
-												"dependsOn": [],
+												"dependsOn": [
+													{
+														"activity": "Set variable1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
 												"policy": {
 													"timeout": "0.12:00:00",
 													"retry": 0,
@@ -142,7 +149,13 @@
 												"typeProperties": {
 													"dataflow": {
 														"referenceName": "DF_customer",
-														"type": "DataFlowReference"
+														"type": "DataFlowReference",
+														"parameters": {
+															"p_file_name_wc": {
+																"value": "'@{variables('v_feed_file')}'",
+																"type": "Expression"
+															}
+														}
 													},
 													"compute": {
 														"coreCount": 8,

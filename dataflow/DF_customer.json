@@ -16,7 +16,7 @@
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
-				"     file_name_wc as string",
+				"     p_file_name_wc as string",
 				"}",
 				"source(output(",
 				"          male as string,",
