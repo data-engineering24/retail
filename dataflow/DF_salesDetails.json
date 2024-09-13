@@ -57,7 +57,7 @@
 			"scriptLines": [
 				"source(output(",
 				"          inward_header_id as short,",
-				"          inward_date as date,",
+				"          inward_date as date 'yyyy/MM/dd',",
 				"          supplier_id as short,",
 				"          branch_id as short,",
 				"          collected_by as boolean,",
