@@ -23,6 +23,9 @@
 			"transformations": [
 				{
 					"name": "join1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -88,7 +91,41 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          inward_header_id = srcInwardHeader@inward_header_id,",
+				"          inward_date = srcInwardHeader@inward_date,",
+				"          supplier_id = srcInwardHeader@supplier_id,",
+				"          branch_id = srcInwardHeader@branch_id,",
+				"          collected_by = srcInwardHeader@collected_by,",
+				"          verified_by = srcInwardHeader@verified_by,",
+				"          amount = srcInwardHeader@amount,",
+				"          discount_amount = srcInwardHeader@discount_amount,",
+				"          tax_amount = srcInwardHeader@tax_amount,",
+				"          final_amount = srcInwardHeader@final_amount,",
+				"          status_id = srcInwardHeader@status_id,",
+				"          created_date = srcInwardHeader@created_date,",
+				"          created_by = srcInwardHeader@created_by,",
+				"          updated_date = srcInwardHeader@updated_date,",
+				"          updated_by = srcInwardHeader@updated_by,",
+				"          inward_header_id = srcInwardDetail@inward_header_id,",
+				"          inward_date = srcInwardDetail@inward_date,",
+				"          supplier_id = srcInwardDetail@supplier_id,",
+				"          branch_id = srcInwardDetail@branch_id,",
+				"          collected_by = srcInwardDetail@collected_by,",
+				"          verified_by = srcInwardDetail@verified_by,",
+				"          amount = srcInwardDetail@amount,",
+				"          discount_amount = srcInwardDetail@discount_amount,",
+				"          tax_amount = srcInwardDetail@tax_amount,",
+				"          final_amount = srcInwardDetail@final_amount,",
+				"          status_id = srcInwardDetail@status_id,",
+				"          created_date = srcInwardDetail@created_date,",
+				"          created_by = srcInwardDetail@created_by,",
+				"          updated_date = srcInwardDetail@updated_date,",
+				"          updated_by = srcInwardDetail@updated_by",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
