@@ -52,7 +52,7 @@
 				"     isolationLevel: 'READ_UNCOMMITTED') ~> sourceDate",
 				"sourceDate select(mapColumn(",
 				"          calendar_id,",
-				"          calendar_value,",
+				"          sales_date = calendar_value,",
 				"          day_number,",
 				"          week_day_number,",
 				"          week_day_name,",
