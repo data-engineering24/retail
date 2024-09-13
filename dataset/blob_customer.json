@@ -1,0 +1,40 @@
+{
+	"name": "blob_customer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "retail",
+				"container": "inbound"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "male",
+				"type": "String"
+			},
+			{
+				"name": "sm.hsyny@example.com",
+				"type": "String"
+			},
+			{
+				"name": "سام",
+				"type": "String"
+			},
+			{
+				"name": "5815",
+				"type": "String"
+			}
+		]
+	}
+}
