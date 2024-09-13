@@ -33,7 +33,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source1",
-				"source1 assert(expectTrue(city!='Chennai', false, 'assert1')) ~> assert1"
+				"source1 assert(expectTrue(ERROR_FUNCTION('city=__SINGLE_QUOTE__Chennai__SINGLE_QUOTE__'), false, 'assert1')) ~> assert1"
 			]
 		}
 	}
