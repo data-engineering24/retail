@@ -12,24 +12,42 @@
 						"referenceName": "blob",
 						"type": "DatasetReference"
 					},
-					"timeout": "0.12:00:00",
+					"timeout": "0.00:00:45",
 					"sleep": 10
 				}
 			},
 			{
 				"name": "Set variable1",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Validation1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "True",
+					"value": ""
+				}
 			},
 			{
 				"name": "Set variable2",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Validation1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -37,6 +55,11 @@
 				"userProperties": []
 			}
 		],
+		"variables": {
+			"True": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
