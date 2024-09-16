@@ -22,7 +22,9 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Source",
-				"Source pivot(columnNaming: '$N$V',",
+				"Source pivot(groupBy({} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION('')),",
+				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> Pivot"
 			]
 		}
