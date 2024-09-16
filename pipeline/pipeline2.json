@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Validation1",
+				"name": "Validation",
 				"type": "Validation",
 				"dependsOn": [],
 				"userProperties": [],
@@ -27,7 +27,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Validation1",
+						"activity": "Validation",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -48,7 +48,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Validation1",
+						"activity": "Validation",
 						"dependencyConditions": [
 							"Failed"
 						]
