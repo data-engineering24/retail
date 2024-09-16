@@ -33,7 +33,11 @@
 					"name": "srcSalesDetail"
 				},
 				{
-					"name": "source3"
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcBranch"
 				}
 			],
 			"sinks": [],
@@ -52,13 +56,6 @@
 				},
 				{
 					"name": "unionSales"
-				},
-				{
-					"name": "flowletDim",
-					"flowlet": {
-						"referenceName": "DF_let_SalesDim",
-						"type": "DataFlowReference"
-					}
 				}
 			],
 			"scriptLines": [
@@ -188,8 +185,27 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcSalesDetail",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source3",
+				"source(output(",
+				"          branch_id as integer,",
+				"          branch as string,",
+				"          branch_incharge as integer,",
+				"          address as string,",
+				"          city_id as integer,",
+				"          state_id as integer,",
+				"          country_id as integer,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_branch',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcBranch",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -232,11 +248,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
-				"selectInward, selectSales union(byName: true)~> unionSales",
-				"unionSales compose(mapColumn(",
-				"          executed_time = sales_date",
-				"     ),",
-				"     composition: 'DF_let_SalesDim') ~> flowletDim@(temporary)"
+				"selectInward, selectSales union(byName: true)~> unionSales"
 			]
 		}
 	}
