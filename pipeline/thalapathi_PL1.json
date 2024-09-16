@@ -46,7 +46,7 @@
 					},
 					"activities": [
 						{
-							"name": "Switch1",
+							"name": "Switch",
 							"type": "Switch",
 							"dependsOn": [],
 							"userProperties": [],
