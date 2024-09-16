@@ -34,7 +34,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "True",
-					"value": ""
+					"value": "True"
 				}
 			},
 			{
@@ -52,11 +52,23 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "",
+					"value": ""
+				}
 			}
 		],
+		"parameters": {
+			"File_name": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"True": {
+				"type": "String"
+			},
+			"Failure": {
 				"type": "String"
 			}
 		},
