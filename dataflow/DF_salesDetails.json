@@ -66,6 +66,20 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcPaymentType"
+				},
+				{
+					"linkedService": {
+						"referenceName": "AzureDataLakeStorage1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcProduct"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcState"
 				}
 			],
 			"sinks": [],
@@ -86,9 +100,6 @@
 					"name": "unionSales"
 				},
 				{
-					"name": "selectBranch"
-				},
-				{
 					"name": "selectCity"
 				},
 				{
@@ -99,6 +110,27 @@
 				},
 				{
 					"name": "selectPaymentType"
+				},
+				{
+					"name": "selectProduct"
+				},
+				{
+					"name": "JoinBranchCityState"
+				},
+				{
+					"name": "selectState"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "JoinBranchCity"
+				},
+				{
+					"name": "SelectBranchCity"
+				},
+				{
+					"name": "JoinBranchState"
 				}
 			],
 			"scriptLines": [
@@ -314,6 +346,51 @@
 				"     schemaName: 'retail',",
 				"     tableName: 'm_product_type',",
 				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcPaymentType",
+				"source(output(",
+				"          product_id as short,",
+				"          product_name as string,",
+				"          product_type_id as short,",
+				"          product_group_id as short,",
+				"          unit as double,",
+				"          uom_id as short,",
+				"          manufacturer_id as short,",
+				"          supplier_id as short,",
+				"          reorder_level as short,",
+				"          status_id as boolean,",
+				"          created_date as date,",
+				"          created_by as boolean,",
+				"          updated_date as date,",
+				"          updated_by as boolean",
+				"     ),",
+				"     useSchema: false,",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'inbound',",
+				"     folderPath: 'retail',",
+				"     fileName: 'xyz_product_20231202.csv',",
+				"     columnDelimiter: ',',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> srcProduct",
+				"source(output(",
+				"          state_id as integer,",
+				"          state as string,",
+				"          country_id as integer,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_state',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcState",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -357,47 +434,87 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
 				"selectInward, selectSales union(byName: true)~> unionSales",
-				"srcBranch select(mapColumn(",
-				"          branch_id,",
-				"          branch,",
-				"          branch_incharge,",
-				"          address,",
-				"          city_id,",
-				"          state_id,",
-				"          country_id,",
-				"          status_id",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectBranch",
 				"srcCity select(mapColumn(",
 				"          city_id,",
 				"          city,",
-				"          state_id,",
-				"          status_id",
+				"          state_id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectCity",
 				"srcPaymentMode select(mapColumn(",
 				"          payment_mode_id,",
-				"          payment_mode,",
-				"          status_id",
+				"          payment_mode",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectPaymenMode",
 				"srcProductGroup select(mapColumn(",
 				"          product_group_id,",
-				"          product_group,",
-				"          status_id",
+				"          product_group",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectProductGroup",
 				"srcPaymentType select(mapColumn(",
 				"          product_type_id,",
-				"          product_type,",
-				"          status_id",
+				"          product_type",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectPaymentType"
+				"     skipDuplicateMapOutputs: true) ~> selectPaymentType",
+				"srcProduct select(mapColumn(",
+				"          product_id,",
+				"          product_name,",
+				"          product_type_id,",
+				"          product_group_id,",
+				"          unit,",
+				"          uom_id,",
+				"          manufacturer_id,",
+				"          supplier_id,",
+				"          reorder_level",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectProduct",
+				"srcState, srcBranch join(srcBranch@state_id == srcState@state_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinBranchCityState",
+				"srcState select(mapColumn(",
+				"          state_id,",
+				"          state,",
+				"          country_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectState",
+				"JoinBranchCityState select(mapColumn(",
+				"          state,",
+				"          branch_id,",
+				"          branch,",
+				"          branch_incharge,",
+				"          address",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"srcBranch, srcCity join(srcBranch@city_id == srcCity@city_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinBranchCity",
+				"JoinBranchCity select(mapColumn(",
+				"          branch_id,",
+				"          branch,",
+				"          branch_incharge,",
+				"          address,",
+				"          city_id = srcBranch@city_id,",
+				"          state_id = srcBranch@state_id,",
+				"          country_id,",
+				"          city",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectBranchCity",
+				"SelectBranchCity, srcState join(SelectBranchCity@state_id == srcState@state_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinBranchState"
 			]
 		}
 	}
