@@ -1,0 +1,32 @@
+{
+	"name": "FeedControl_SFTP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Sftp1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": "SF.csv",
+				"folderPath": "/home/impiger/Feed"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "FEED_ID",
+				"type": "String"
+			},
+			{
+				"name": "SRC_TABLE",
+				"type": "String"
+			}
+		]
+	}
+}
