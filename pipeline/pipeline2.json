@@ -60,8 +60,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "",
-					"value": ""
+					"variableName": "Failure",
+					"value": "Failure"
 				}
 			}
 		],
