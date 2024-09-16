@@ -15,7 +15,7 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "pivot1"
+					"name": "Pivot"
 				}
 			],
 			"scriptLines": [
@@ -24,7 +24,7 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Source",
 				"Source pivot(columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1"
+				"     lateral: true) ~> Pivot"
 			]
 		}
 	}
