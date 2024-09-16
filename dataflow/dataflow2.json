@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "pivot_unpivot",
+						"type": "DatasetReference"
+					},
 					"name": "Source"
 				}
 			],
@@ -16,7 +20,8 @@
 			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> Source",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Source",
 				"Source pivot(columnNaming: '$N$V',",
 				"     lateral: true) ~> Pivot"
 			]
