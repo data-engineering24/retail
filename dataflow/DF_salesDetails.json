@@ -38,6 +38,34 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcBranch"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcCity"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcPaymentMode"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcProductGroup"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "srcPaymentType"
 				}
 			],
 			"sinks": [],
@@ -56,6 +84,21 @@
 				},
 				{
 					"name": "unionSales"
+				},
+				{
+					"name": "selectBranch"
+				},
+				{
+					"name": "selectCity"
+				},
+				{
+					"name": "selectPaymenMode"
+				},
+				{
+					"name": "selectProductGroup"
+				},
+				{
+					"name": "selectPaymentType"
 				}
 			],
 			"scriptLines": [
@@ -206,6 +249,71 @@
 				"     schemaName: 'retail',",
 				"     tableName: 'm_branch',",
 				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcBranch",
+				"source(output(",
+				"          city_id as integer,",
+				"          city as string,",
+				"          state_id as integer,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_city',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcCity",
+				"source(output(",
+				"          payment_mode_id as integer,",
+				"          payment_mode as string,",
+				"          status_id as integer,",
+				"          created_date as timestamp,",
+				"          created_by as integer,",
+				"          updated_date as timestamp,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_payment_mode',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcPaymentMode",
+				"source(output(",
+				"          product_group_id as integer,",
+				"          product_group as string,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_product_group',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcProductGroup",
+				"source(output(",
+				"          product_type_id as integer,",
+				"          product_type as string,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_product_type',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcPaymentType",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -248,7 +356,48 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectSales",
-				"selectInward, selectSales union(byName: true)~> unionSales"
+				"selectInward, selectSales union(byName: true)~> unionSales",
+				"srcBranch select(mapColumn(",
+				"          branch_id,",
+				"          branch,",
+				"          branch_incharge,",
+				"          address,",
+				"          city_id,",
+				"          state_id,",
+				"          country_id,",
+				"          status_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectBranch",
+				"srcCity select(mapColumn(",
+				"          city_id,",
+				"          city,",
+				"          state_id,",
+				"          status_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectCity",
+				"srcPaymentMode select(mapColumn(",
+				"          payment_mode_id,",
+				"          payment_mode,",
+				"          status_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectPaymenMode",
+				"srcProductGroup select(mapColumn(",
+				"          product_group_id,",
+				"          product_group,",
+				"          status_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectProductGroup",
+				"srcPaymentType select(mapColumn(",
+				"          product_type_id,",
+				"          product_type,",
+				"          status_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectPaymentType"
 			]
 		}
 	}
