@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "impiger_dev_db",
+						"referenceName": "pivot_unpivot",
 						"type": "DatasetReference"
 					},
 					"name": "Source"
@@ -21,8 +21,7 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Source",
+				"     ignoreNoFilesFound: false) ~> Source",
 				"Source pivot(columnNaming: '$N$V',",
 				"     lateral: true) ~> Pivot"
 			]
