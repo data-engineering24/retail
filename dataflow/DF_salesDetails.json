@@ -79,7 +79,7 @@
 						"referenceName": "impiger_dev_db",
 						"type": "LinkedServiceReference"
 					},
-					"name": "srcState"
+					"name": "srcSalesTerminal"
 				}
 			],
 			"sinks": [],
@@ -113,15 +113,6 @@
 				},
 				{
 					"name": "selectProduct"
-				},
-				{
-					"name": "JoinBranchCityState"
-				},
-				{
-					"name": "selectState"
-				},
-				{
-					"name": "select1"
 				},
 				{
 					"name": "JoinBranchCity"
@@ -375,9 +366,9 @@
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcProduct",
 				"source(output(",
-				"          state_id as integer,",
-				"          state as string,",
-				"          country_id as integer,",
+				"          sales_terminal_id as integer,",
+				"          branch_id as integer,",
+				"          terminal_name as string,",
 				"          status_id as integer,",
 				"          created_date as date,",
 				"          created_by as integer,",
@@ -389,8 +380,8 @@
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
-				"     tableName: 'm_state',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcState",
+				"     tableName: 'm_sales_terminal',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcSalesTerminal",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -472,27 +463,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectProduct",
-				"srcState, srcBranch join(srcBranch@state_id == srcState@state_id,",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> JoinBranchCityState",
-				"srcState select(mapColumn(",
-				"          state_id,",
-				"          state,",
-				"          country_id",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectState",
-				"JoinBranchCityState select(mapColumn(",
-				"          state,",
-				"          branch_id,",
-				"          branch,",
-				"          branch_incharge,",
-				"          address",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
 				"srcBranch, srcCity join(srcBranch@city_id == srcCity@city_id,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
@@ -510,7 +480,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectBranchCity",
-				"SelectBranchCity, srcState join(SelectBranchCity@state_id == srcState@state_id,",
+				"SelectBranchCity, srcSalesTerminal join(SelectBranchCity@state_id == srcState@state_id,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
