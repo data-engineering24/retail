@@ -9,8 +9,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "blob",
-						"type": "DatasetReference"
+						"referenceName": "Validation_Dataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_name": {
+								"value": "@pipeline().parameters.File_name",
+								"type": "Expression"
+							}
+						}
 					},
 					"timeout": "0.00:00:45",
 					"sleep": 10
