@@ -79,7 +79,7 @@
 						"referenceName": "impiger_dev_db",
 						"type": "LinkedServiceReference"
 					},
-					"name": "source1"
+					"name": "srcState"
 				}
 			],
 			"sinks": [],
@@ -121,7 +121,10 @@
 					"name": "SelectBranchCity"
 				},
 				{
-					"name": "join1"
+					"name": "JoinBranchState"
+				},
+				{
+					"name": "selectState"
 				}
 			],
 			"scriptLines": [
@@ -365,13 +368,23 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcProduct",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          state_id as integer,",
+				"          state as string,",
+				"          country_id as integer,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
 				"     tableName: 'm_state',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcState",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -469,11 +482,17 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectBranchCity",
-				"SelectBranchCity join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
+				"SelectBranchCity, srcState join(SelectBranchCity@state_id == srcState@state_id,",
+				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> JoinBranchState",
+				"srcState select(mapColumn(",
+				"          state_id,",
+				"          state",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectState"
 			]
 		}
 	}
