@@ -49,10 +49,9 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join",
 				"join select(mapColumn(",
-				"          city_id = city@city_id,",
+				"          cust_name,",
 				"          city_name,",
-				"          city_id = customer@city_id,",
-				"          cust_name",
+				"          city_id = customer@city_id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1"
