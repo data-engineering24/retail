@@ -51,7 +51,7 @@
 				"join select(mapColumn(",
 				"          cust_name,",
 				"          city_name,",
-				"          city_id = city@city_id",
+				"          city_id = customer@city_id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1"
