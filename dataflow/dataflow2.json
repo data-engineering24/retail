@@ -13,18 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "Pivot"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> Source",
-				"Source pivot(groupBy({} = ERROR_FUNCTION('')),",
-				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> Pivot"
+				"     ignoreNoFilesFound: false) ~> Source"
 			]
 		}
 	}
