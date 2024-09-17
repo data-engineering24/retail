@@ -20,7 +20,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          ID as short,",
+				"          ID as integer,",
 				"          ITEM as string,",
 				"          QTY as integer,",
 				"          YEAR as integer",
