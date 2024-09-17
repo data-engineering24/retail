@@ -1,0 +1,16 @@
+{
+	"name": "city_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "impiger_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "retail",
+			"table": "m_city"
+		}
+	}
+}
