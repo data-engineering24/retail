@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "select1"
+				},
+				{
+					"name": "pivot1"
 				}
 			],
 			"scriptLines": [
@@ -23,7 +26,9 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source",
 				"source select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 pivot(columnNaming: '$N$V',",
+				"     lateral: true) ~> pivot1"
 			]
 		}
 	}
