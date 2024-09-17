@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
 					"name": "city"
 				},
 				{
@@ -25,8 +29,15 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> city",
+				"source(output(",
+				"          id as integer,",
+				"          feed_name as string,",
+				"          feed_file as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> city",
 				"source(output(",
 				"          city_id as string,",
 				"          cust_name as string",
