@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"linkedService": {
-						"referenceName": "impiger_dev_db",
-						"type": "LinkedServiceReference"
-					},
 					"name": "city"
 				},
 				{
@@ -30,12 +26,7 @@
 			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: '',",
-				"     tableName: '',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> city",
+				"     validateSchema: false) ~> city",
 				"source(output(",
 				"          city_id as string,",
 				"          cust_name as string",
