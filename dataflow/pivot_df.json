@@ -30,7 +30,7 @@
 				"     ignoreNoFilesFound: false) ~> source",
 				"source pivot(groupBy(YEAR),",
 				"     pivotBy(ITEM),",
-				"     QTY = ERROR_FUNCTION(''),",
+				"     QTY = sum(QTY),",
 				"     columnNaming: '$N-$V',",
 				"     lateral: true) ~> pivot1"
 			]
