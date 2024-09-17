@@ -1,0 +1,75 @@
+{
+	"name": "dataflow3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          branch_id as integer,",
+				"          branch as string,",
+				"          branch_incharge as integer,",
+				"          address as string,",
+				"          city_id as integer,",
+				"          state_id as integer,",
+				"          country_id as integer,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_branch',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
+				"source(output(",
+				"          country_id as integer,",
+				"          country as string,",
+				"          region as string,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_country',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> source2",
+				"source1, source2 join(source1@country_id == source2@country_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
+			]
+		}
+	}
+}
