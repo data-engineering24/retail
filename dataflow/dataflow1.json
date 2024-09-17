@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "blob_json_src",
-						"type": "DatasetReference"
-					},
 					"name": "source"
 				}
 			],
@@ -35,9 +31,7 @@
 				"          info as (seed as string, results as integer, page as integer, version as string)",
 				"     ),",
 				"     allowSchemaDrift: false,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> source",
+				"     validateSchema: false) ~> source",
 				"source select(mapColumn(",
 				"          gender = results[1].gender,",
 				"          city = results[1].email,",
