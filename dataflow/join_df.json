@@ -9,18 +9,22 @@
 						"referenceName": "city_ds",
 						"type": "DatasetReference"
 					},
-					"name": "source"
+					"name": "city"
 				},
 				{
 					"dataset": {
 						"referenceName": "cust_ds",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "customer"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "join"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          city_id as string,",
@@ -28,14 +32,19 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source",
+				"     ignoreNoFilesFound: false) ~> city",
 				"source(output(",
 				"          city_id as string,",
 				"          cust_name as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> customer",
+				"city, customer join(city@city_id == customer@city_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join"
 			]
 		}
 	}
