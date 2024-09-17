@@ -73,6 +73,13 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "srcProduct"
+				},
+				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -114,7 +121,7 @@
 					"name": "SelectBranchCity"
 				},
 				{
-					"name": "JoinBranchState"
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -358,6 +365,13 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> srcProduct",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'm_state',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
@@ -447,7 +461,6 @@
 				"JoinBranchCity select(mapColumn(",
 				"          branch_id,",
 				"          branch,",
-				"          branch_incharge,",
 				"          address,",
 				"          city_id = srcBranch@city_id,",
 				"          state_id = srcBranch@state_id,",
@@ -456,11 +469,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectBranchCity",
-				"SelectBranchCity join(SelectBranchCity@state_id == srcState@state_id,",
-				"     joinType:'left',",
+				"SelectBranchCity join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> JoinBranchState"
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
