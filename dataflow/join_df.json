@@ -40,9 +40,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> customer",
-				"city, customer join(city@city_id == customer@city_id,",
+				"city, customer join(fuzzyCompare(city@city_id, customer@city_id, 80.00),",
 				"     joinType:'inner',",
-				"     matchType:'exact',",
+				"     matchType:'fuzzy',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join"
 			]
