@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "source"
+				},
+				{
+					"dataset": {
+						"referenceName": "cust_ds",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -21,7 +28,14 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source"
+				"     ignoreNoFilesFound: false) ~> source",
+				"source(output(",
+				"          city_id as string,",
+				"          cust_name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1"
 			]
 		}
 	}
