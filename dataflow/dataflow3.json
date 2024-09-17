@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "AzureSqlTable2",
-						"type": "DatasetReference"
-					},
 					"name": "source1"
 				}
 			],
@@ -33,9 +29,7 @@
 				"          updated_by as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1",
+				"     validateSchema: false) ~> source1",
 				"source1 assert(expectTrue(state_id == 1, false, 'assert1'),",
 				"     expectTrue(state_id == 2, false, 'assert2'),",
 				"     expectTrue(state_id == 3, false, 'assert3')) ~> assert1",
