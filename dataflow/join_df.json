@@ -5,9 +5,9 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "city_ds",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
 					},
 					"name": "city"
 				},
@@ -29,13 +29,13 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          city_id as string,",
-				"          city_name as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> city",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: '',",
+				"     tableName: '',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> city",
 				"source(output(",
 				"          city_id as string,",
 				"          cust_name as string",
@@ -51,7 +51,7 @@
 				"join select(mapColumn(",
 				"          cust_name,",
 				"          city_name,",
-				"          city_id = customer@city_id",
+				"          city_id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1"
