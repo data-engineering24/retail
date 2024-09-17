@@ -15,19 +15,20 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "select1"
-				},
-				{
 					"name": "pivot1"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ID as short,",
+				"          ITEM as string,",
+				"          QTY as short,",
+				"          YEAR as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source",
-				"source select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 pivot(columnNaming: '$N$V',",
+				"source pivot(columnNaming: '$N$V',",
 				"     lateral: true) ~> pivot1"
 			]
 		}
