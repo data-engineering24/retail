@@ -1,0 +1,33 @@
+{
+	"name": "city_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "city_name(Sheet1).csv",
+				"folderPath": "ashok",
+				"container": "inbound"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "city_id",
+				"type": "String"
+			},
+			{
+				"name": "city_name",
+				"type": "String"
+			}
+		]
+	}
+}
