@@ -5,14 +5,23 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "city_ds",
+						"type": "DatasetReference"
+					},
 					"name": "source"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source"
+				"source(output(",
+				"          city_id as string,",
+				"          city_name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source"
 			]
 		}
 	}
