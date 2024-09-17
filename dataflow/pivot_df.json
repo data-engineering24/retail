@@ -28,7 +28,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source",
-				"source pivot(columnNaming: '$N$V',",
+				"source pivot(groupBy(YEAR),",
+				"     pivotBy(ITEM),",
+				"     columnNaming: '$N-$V',",
 				"     lateral: true) ~> pivot1"
 			]
 		}
