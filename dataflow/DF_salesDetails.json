@@ -138,6 +138,9 @@
 				},
 				{
 					"name": "joinBranch"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -398,7 +401,17 @@
 				"     schemaName: 'retail',",
 				"     tableName: 'm_state',",
 				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcState",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          country_id as integer,",
+				"          country as string,",
+				"          region as string,",
+				"          status_id as integer,",
+				"          created_date as date,",
+				"          created_by as integer,",
+				"          updated_date as date,",
+				"          updated_by as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     format: 'table',",
@@ -525,11 +538,21 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectBranchState",
-				"SelectBranchState, srcCountry join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"SelectBranchState, srcCountry join(SelectBranchState@country_id == srcCountry@country_id,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joinBranch"
+				"     broadcast: 'auto')~> joinBranch",
+				"joinBranch select(mapColumn(",
+				"          branch_id,",
+				"          branch,",
+				"          address,",
+				"          city,",
+				"          state,",
+				"          country",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
