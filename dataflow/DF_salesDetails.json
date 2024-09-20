@@ -91,6 +91,10 @@
 			],
 			"sinks": [
 				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
 					"name": "sinkBranchDim"
 				}
 			],
@@ -559,8 +563,18 @@
 				"     skipDuplicateMapOutputs: true) ~> selectBranch",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'DimBranch',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     recreate: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkBranchDim"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim"
 			]
 		}
 	}
