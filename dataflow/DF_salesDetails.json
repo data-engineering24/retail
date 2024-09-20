@@ -403,7 +403,7 @@
 				"     limit: 100,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
-				"     schemaName: 'retail',",
+				"     schemaName: '',",
 				"     tableName: 'm_country',",
 				"     isolationLevel: 'READ_UNCOMMITTED') ~> srcCountry",
 				"srcInwardHeader, srcInwardDetail join(srcInwardHeader@inward_header_id == srcInwardDetail@inward_header_id,",
