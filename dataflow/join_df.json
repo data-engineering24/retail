@@ -13,14 +13,7 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "stringify1"
-				},
-				{
-					"name": "select1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          Column_1 as string,",
@@ -29,15 +22,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source",
-				"select1 stringify(format: 'json') ~> stringify1",
-				"source select(mapColumn(",
-				"          Column_1,",
-				"          Column_2,",
-				"          Column_3",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     ignoreNoFilesFound: false) ~> source"
 			]
 		}
 	}
