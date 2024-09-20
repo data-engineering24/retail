@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "city_ds",
-						"type": "DatasetReference"
-					},
 					"name": "source"
 				}
 			],
@@ -19,13 +15,8 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          city_id as string,",
-				"          city_name as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source",
 				"source stringify(format: 'json') ~> stringify1"
 			]
 		}
