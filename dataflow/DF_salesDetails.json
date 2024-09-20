@@ -180,6 +180,15 @@
 				},
 				{
 					"name": "sort1"
+				},
+				{
+					"name": "sort2"
+				},
+				{
+					"name": "sort3"
+				},
+				{
+					"name": "sort4"
 				}
 			],
 			"scriptLines": [
@@ -593,6 +602,9 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBranch",
 				"selectProductGroup sort(asc(product_group_id, true)) ~> sort1",
+				"selectPaymentType sort(asc(ERROR_FUNCTION(''), true)) ~> sort2",
+				"selectProduct sort(asc(ERROR_FUNCTION(''), true)) ~> sort3",
+				"selectPaymenMode sort(asc(ERROR_FUNCTION(''), true)) ~> sort4",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -607,7 +619,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim",
-				"selectPaymenMode sink(allowSchemaDrift: true,",
+				"sort4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
@@ -635,31 +647,31 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkProductGroupDim",
-				"selectPaymentType sink(allowSchemaDrift: true,",
+				"sort2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
 				"     tableName: 'DimPaymentType',",
-				"     insertable: true,",
+				"     insertable: false,",
 				"     updateable: false,",
 				"     deletable: false,",
-				"     upsertable: false,",
-				"     recreate: true,",
+				"     upsertable: true,",
+				"     keys:['product_type_id'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkPaymentTypeDim",
-				"selectProduct sink(allowSchemaDrift: true,",
+				"sort3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
 				"     tableName: 'DimProduct',",
-				"     insertable: true,",
+				"     insertable: false,",
 				"     updateable: false,",
 				"     deletable: false,",
-				"     upsertable: false,",
-				"     recreate: true,",
+				"     upsertable: true,",
+				"     keys:['product_id'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkProductDim"
