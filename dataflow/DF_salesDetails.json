@@ -104,10 +104,10 @@
 					"name": "sinkProductGroupDim"
 				},
 				{
-					"name": "sink3"
+					"name": "sinkPaymentTypeDim"
 				},
 				{
-					"name": "sink4"
+					"name": "sinkProductDim"
 				}
 			],
 			"transformations": [
@@ -598,11 +598,11 @@
 				"selectPaymentType sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink3",
+				"     skipDuplicateMapOutputs: true) ~> sinkPaymentTypeDim",
 				"selectProduct sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink4"
+				"     skipDuplicateMapOutputs: true) ~> sinkProductDim"
 			]
 		}
 	}
