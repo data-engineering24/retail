@@ -98,10 +98,10 @@
 					"name": "sinkBranchDim"
 				},
 				{
-					"name": "sink1"
+					"name": "sinkpaymentmodeDim"
 				},
 				{
-					"name": "sink2"
+					"name": "sinkProductGroupDim"
 				},
 				{
 					"name": "sink3"
@@ -590,11 +590,11 @@
 				"selectPaymenMode sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"     skipDuplicateMapOutputs: true) ~> sinkpaymentmodeDim",
 				"selectProductGroup sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink2",
+				"     skipDuplicateMapOutputs: true) ~> sinkProductGroupDim",
 				"selectPaymentType sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
