@@ -14,7 +14,8 @@
 				"fileName": "Customer_names.xlsx",
 				"folderPath": "retail",
 				"container": "inbound"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
