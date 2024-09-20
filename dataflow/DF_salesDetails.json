@@ -96,6 +96,18 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "sinkBranchDim"
+				},
+				{
+					"name": "sink1"
+				},
+				{
+					"name": "sink2"
+				},
+				{
+					"name": "sink3"
+				},
+				{
+					"name": "sink4"
 				}
 			],
 			"transformations": [
@@ -574,7 +586,23 @@
 				"     recreate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim",
+				"selectPaymenMode sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"selectProductGroup sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2",
+				"selectPaymentType sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink3",
+				"selectProduct sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink4"
 			]
 		}
 	}
