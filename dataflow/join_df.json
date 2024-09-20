@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "Excel",
-						"type": "DatasetReference"
-					},
 					"name": "source"
 				}
 			],
@@ -25,8 +21,7 @@
 				"          Column_3 as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source",
+				"     validateSchema: false) ~> source",
 				"source select(mapColumn(",
 				"          Column_1 = Column_2",
 				"     ),",
