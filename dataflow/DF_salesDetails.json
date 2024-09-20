@@ -196,6 +196,9 @@
 				},
 				{
 					"name": "sort4"
+				},
+				{
+					"name": "AlterRow1"
 				}
 			],
 			"scriptLines": [
@@ -612,6 +615,7 @@
 				"selectPaymentType sort(asc(product_type_id, true)) ~> sort2",
 				"selectProduct sort(asc(product_id, true)) ~> sort3",
 				"selectPaymenMode sort(asc(payment_mode_id, true)) ~> sort4",
+				"sort4 alterRow() ~> AlterRow1",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -626,7 +630,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim",
-				"sort4 sink(allowSchemaDrift: true,",
+				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
