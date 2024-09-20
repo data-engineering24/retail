@@ -186,16 +186,16 @@
 					"name": "selectBranch"
 				},
 				{
-					"name": "sort1"
+					"name": "sortProductGroupID"
 				},
 				{
-					"name": "sort2"
+					"name": "sortPaymentTypeID"
 				},
 				{
-					"name": "sort3"
+					"name": "sortProductID"
 				},
 				{
-					"name": "sort4"
+					"name": "sortPaymentModeID"
 				},
 				{
 					"name": "AlterRow1"
@@ -611,11 +611,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBranch",
-				"selectProductGroup sort(asc(product_group_id, true)) ~> sort1",
-				"selectPaymentType sort(asc(product_type_id, true)) ~> sort2",
-				"selectProduct sort(asc(product_id, true)) ~> sort3",
-				"selectPaymenMode sort(asc(payment_mode_id, true)) ~> sort4",
-				"sort4 alterRow() ~> AlterRow1",
+				"selectProductGroup sort(asc(product_group_id, true)) ~> sortProductGroupID",
+				"selectPaymentType sort(asc(product_type_id, true)) ~> sortPaymentTypeID",
+				"selectProduct sort(asc(product_id, true)) ~> sortProductID",
+				"selectPaymenMode sort(asc(payment_mode_id, true)) ~> sortPaymentModeID",
+				"sortPaymentModeID alterRow() ~> AlterRow1",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -645,7 +645,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkpaymentmodeDim",
-				"sort1 sink(allowSchemaDrift: true,",
+				"sortProductGroupID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
@@ -659,7 +659,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkProductGroupDim",
-				"sort2 sink(allowSchemaDrift: true,",
+				"sortPaymentTypeID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
@@ -673,7 +673,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkPaymentTypeDim",
-				"sort3 sink(allowSchemaDrift: true,",
+				"sortProductID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
