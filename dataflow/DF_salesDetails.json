@@ -98,6 +98,10 @@
 					"name": "sinkBranchDim"
 				},
 				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
 					"name": "sinkpaymentmodeDim"
 				},
 				{
@@ -115,6 +119,10 @@
 					"name": "sinkPaymentTypeDim"
 				},
 				{
+					"linkedService": {
+						"referenceName": "impiger_dev_db",
+						"type": "LinkedServiceReference"
+					},
 					"name": "sinkProductDim"
 				}
 			],
@@ -597,8 +605,18 @@
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkBranchDim",
 				"selectPaymenMode sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'DimPaymentMode',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     recreate: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkpaymentmodeDim",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkpaymentmodeDim",
 				"selectProductGroup sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -629,8 +647,18 @@
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkPaymentTypeDim",
 				"selectProduct sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'retail',",
+				"     tableName: 'DimProduct',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     recreate: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkProductDim"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkProductDim"
 			]
 		}
 	}
