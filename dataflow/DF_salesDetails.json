@@ -638,7 +638,7 @@
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
-				"     tableName: 'DimPaymentType',",
+				"     tableName: 'DimProductGroup',",
 				"     insertable: false,",
 				"     updateable: false,",
 				"     deletable: false,",
