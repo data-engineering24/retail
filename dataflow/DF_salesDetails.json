@@ -89,7 +89,11 @@
 					"name": "srcCountry"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sinkBranchDim"
+				}
+			],
 			"transformations": [
 				{
 					"name": "joinInward"
@@ -140,7 +144,7 @@
 					"name": "joinBranch"
 				},
 				{
-					"name": "select1"
+					"name": "selectBranch"
 				}
 			],
 			"scriptLines": [
@@ -552,7 +556,11 @@
 				"          country",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> selectBranch",
+				"selectBranch sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkBranchDim"
 			]
 		}
 	}
