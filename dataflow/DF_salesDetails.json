@@ -521,7 +521,7 @@
 				"          city_id,",
 				"          city,",
 				"          state,",
-				"          country_id = srcState@country_id",
+				"          country_id = SelectBranchCity@country_id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectBranchState",
