@@ -1,0 +1,37 @@
+{
+	"name": "cust_stringly",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Customer_names.csv",
+				"folderPath": "retail",
+				"container": "inbound"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CustomersNames",
+				"type": "String"
+			},
+			{
+				"name": "Employee_names",
+				"type": "String"
+			},
+			{
+				"name": "Payment_id",
+				"type": "String"
+			}
+		]
+	}
+}
