@@ -177,6 +177,9 @@
 				},
 				{
 					"name": "selectBranch"
+				},
+				{
+					"name": "sort1"
 				}
 			],
 			"scriptLines": [
@@ -589,6 +592,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectBranch",
+				"selectProductGroup sort(asc(product_group_id, true)) ~> sort1",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -617,7 +621,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkpaymentmodeDim",
-				"selectProductGroup sink(allowSchemaDrift: true,",
+				"sort1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
