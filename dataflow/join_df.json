@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "stringify1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -27,7 +30,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source",
-				"source stringify(format: 'json') ~> stringify1"
+				"select1 stringify(format: 'json') ~> stringify1",
+				"source select(mapColumn(",
+				"          Column_1,",
+				"          Column_2,",
+				"          Column_3",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
