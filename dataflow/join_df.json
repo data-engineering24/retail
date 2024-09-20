@@ -27,10 +27,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source",
-				"source select(mapColumn(",
-				"          Column_1 = Column_2",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
+				"source select(skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
