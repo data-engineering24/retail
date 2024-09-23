@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "retail",
-			"table": "currency"
+			"table": "currency_2"
 		}
 	}
 }
