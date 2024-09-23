@@ -1,0 +1,12 @@
+{
+	"name": "apiCurrency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "apiCurrency",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
