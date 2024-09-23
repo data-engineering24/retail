@@ -1,0 +1,12 @@
+{
+	"name": "apiCurrency",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://v6.exchangerate-api.com/v6/469d8107a599090468e6f851/latest/inr",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
