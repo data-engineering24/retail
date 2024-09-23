@@ -1,0 +1,17 @@
+{
+	"name": "api_currency_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Currency_api_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
