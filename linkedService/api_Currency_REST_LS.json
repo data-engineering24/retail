@@ -1,0 +1,12 @@
+{
+	"name": "api_Currency_REST_LS",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://v6.exchangerate-api.com/v6/469d8107a599090468e6f851/latest/USD",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
