@@ -1,0 +1,54 @@
+{
+	"name": "DimSalesTerminal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "impiger_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "sales_terminal_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "branch_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "terminal_name",
+				"type": "varchar"
+			},
+			{
+				"name": "status_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "created_date",
+				"type": "date"
+			},
+			{
+				"name": "created_by",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "updated_date",
+				"type": "date"
+			},
+			{
+				"name": "updated_by",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "retail",
+			"table": "m_sales_terminal"
+		}
+	}
+}
