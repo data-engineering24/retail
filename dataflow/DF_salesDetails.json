@@ -202,6 +202,12 @@
 				},
 				{
 					"name": "alterRowProduct"
+				},
+				{
+					"name": "alterRowPaymentType"
+				},
+				{
+					"name": "alterRowProductGroup"
 				}
 			],
 			"scriptLines": [
@@ -619,7 +625,9 @@
 				"selectProduct sort(asc(product_id, true)) ~> sortProductID",
 				"selectPaymenMode sort(asc(payment_mode_id, true)) ~> sortPaymentModeID",
 				"sortPaymentModeID alterRow(upsertIf(1==1)) ~> AlterRow1",
-				"sortProductID alterRow() ~> alterRowProduct",
+				"sortProductID alterRow(upsertIf(1==1)) ~> alterRowProduct",
+				"sortPaymentTypeID alterRow(upsertIf(1==1)) ~> alterRowPaymentType",
+				"sortProductGroupID alterRow(upsertIf(1==1)) ~> alterRowProductGroup",
 				"selectBranch sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
@@ -649,13 +657,13 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkpaymentmodeDim",
-				"sortProductGroupID sink(allowSchemaDrift: true,",
+				"alterRowProductGroup sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'retail',",
 				"     tableName: 'DimProductGroup',",
-				"     insertable: false,",
+				"     insertable: true,",
 				"     updateable: false,",
 				"     deletable: false,",
 				"     upsertable: true,",
@@ -663,7 +671,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sinkProductGroupDim",
-				"sortPaymentTypeID sink(allowSchemaDrift: true,",
+				"alterRowPaymentType sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
