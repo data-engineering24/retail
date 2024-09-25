@@ -65,8 +65,8 @@
 				}
 			},
 			{
-				"name": "Notebook1",
-				"type": "SynapseNotebook",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -77,7 +77,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"snapshot": true
+					"enableStaging": false
 				}
 			}
 		],
