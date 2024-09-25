@@ -16,7 +16,8 @@
 						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
 					},
-					"name": "Target"
+					"name": "Target",
+					"description": "Import data from Azure Sql Table"
 				}
 			],
 			"sinks": [],
