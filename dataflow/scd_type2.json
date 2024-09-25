@@ -12,6 +12,10 @@
 					"name": "Source"
 				},
 				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
 					"name": "Target"
 				}
 			],
@@ -27,7 +31,9 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Source",
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> Target"
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Target"
 			]
 		}
 	}
