@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "new_table"
+			"table": "customer_scd2"
 		}
 	}
 }
