@@ -12,18 +12,11 @@
 					"name": "source"
 				},
 				{
-					"linkedService": {
-						"referenceName": "impiger_dev_db",
-						"type": "LinkedServiceReference"
-					},
-					"name": "source1"
-				},
-				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "blob",
 						"type": "DatasetReference"
 					},
-					"name": "source2"
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -44,20 +37,7 @@
 				"     ignoreNoFilesFound: false) ~> source",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: '',",
-				"     tableName: '',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
-				"source(output(",
-				"          id as integer,",
-				"          feed_name as string,",
-				"          feed_file as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source2",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"source pivot(groupBy(YEAR),",
 				"     pivotBy(ITEM),",
 				"     QTY = sum(QTY),",
