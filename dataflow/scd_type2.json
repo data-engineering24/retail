@@ -20,8 +20,38 @@
 					"description": "Import data from Azure Sql Table"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					},
+					"name": "sink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Srchash",
+					"description": "'Src_hash'"
+				},
+				{
+					"name": "targethash",
+					"description": " 'tgtHash'"
+				},
+				{
+					"name": "exists"
+				},
+				{
+					"name": "IsActive",
+					"description": "New Records( U & I ) 'isactive' = 1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "exists1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CustomersNames as string,",
@@ -31,10 +61,42 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Source",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          CustomersNames as string,",
+				"          Employee_names as string,",
+				"          Payment_id as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Target"
+				"     format: 'table') ~> Target",
+				"Source derive(Src_hash = md5(CustomersNames,Employee_names,Payment_id)) ~> Srchash",
+				"Target derive(tgtHash = md5(CustomersNames,Employee_names,Payment_id)) ~> targethash",
+				"Srchash, targethash exists(Src_hash == tgtHash,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists",
+				"exists derive(isactive = 1) ~> IsActive",
+				"IsActive select(mapColumn(",
+				"          CustomersNames,",
+				"          Employee_names,",
+				"          Payment_id,",
+				"          isactive",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"targethash, Srchash exists(tgtHash == Src_hash,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink"
 			]
 		}
 	}
