@@ -18,7 +18,7 @@
 				"source(output(",
 				"          CustomersNames as string,",
 				"          Employee_names as string,",
-				"          Payment_id as string",
+				"          Payment_id as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
