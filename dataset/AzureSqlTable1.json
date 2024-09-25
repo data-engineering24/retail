@@ -23,8 +23,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "retail",
-			"table": "api_table"
+			"schema": "dbo",
+			"table": "customer_scd2"
 		}
 	}
 }
