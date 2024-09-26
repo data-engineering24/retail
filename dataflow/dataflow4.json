@@ -29,7 +29,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source",
-				"source alterRow(deleteIf(ERROR_FUNCTION('{isactive}=1'))) ~> alterRow1"
+				"source alterRow(deleteIf(isactive == 1)) ~> alterRow1"
 			]
 		}
 	}
