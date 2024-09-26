@@ -44,7 +44,7 @@
 				"     insertable:false,",
 				"     updateable:false,",
 				"     upsertable:false,",
-				"     keys:['isactive'],",
+				"     keys:['Payment_id'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
