@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "alterRow1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CustomersNames as string,",
@@ -22,7 +26,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source"
+				"     ignoreNoFilesFound: false) ~> source",
+				"source alterRow() ~> alterRow1"
 			]
 		}
 	}
