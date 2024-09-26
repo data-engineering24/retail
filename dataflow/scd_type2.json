@@ -92,7 +92,7 @@
 				"Source derive(Src_hash = md5(CustomersNames,Employee_names,Payment_id)) ~> Srchash",
 				"Target derive(tgtHash = md5(CustomersNames,Employee_names,Payment_id)) ~> targethash",
 				"Srchash, targethash exists(Src_hash == tgtHash,",
-				"     negate:true,",
+				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"exists derive(isactive = 1) ~> IsActive",
 				"IsActive select(mapColumn(",
