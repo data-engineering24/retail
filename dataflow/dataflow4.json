@@ -37,7 +37,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source",
-				"source alterRow(deleteIf(Payment_id==11111)) ~> alterRow1",
+				"source alterRow(deleteIf(Payment_id==111111)) ~> alterRow1",
 				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:true,",
